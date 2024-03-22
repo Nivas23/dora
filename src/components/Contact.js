@@ -1,5 +1,5 @@
 import emailjs from "emailjs-com";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Contact = (props) => {
   const [mailData, setMailData] = useState({
@@ -41,29 +41,6 @@ const Contact = (props) => {
       setError(null);
     }, 2000);
   };
-
-  const [value, setValue] = useState(null);
-  useEffect(() => {
-    fetch(
-      "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Work with the JSON data here
-        setValue(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the fetch
-        console.error("Fetch error:", error);
-      });
-  }, []);
-
   return (
     <section className="contact-section" id="contact">
       <div className="container">
@@ -79,38 +56,13 @@ const Contact = (props) => {
             </p>
 
             <ul className="contact-social wow fadeInUp">
-              {props.data.map((item) => (
-                <li>
+              {props.data.map((item,index) => (
+                <li key={index}>
                   <a href={`${item.url}`}>
                     <i className={`fab fa-${item.platform.toLowerCase()}`} />
                   </a>
                 </li>
               ))}
-              {/* <li>
-                  <a href={`${value.user.social_handles[0].url}`}>
-                    <i className="fab fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href={`${value.user.social_handles[0].url}`}>
-                    <i className="fab fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href={`${value.user.social_handles[1].url}`}>
-                    <i className="fab fa-twitter" />
-                  </a>
-                </li>
-                <li>
-                  <a href={`${value.user.social_handles[1].url}`}>
-                    <i className="fab fa-dribbble" />
-                  </a>
-                </li>
-                <li>
-                  <a href={`${value.user.social_handles[1].url}`}>
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                </li> */}
             </ul>
           </div>
           {/* Contact right */}

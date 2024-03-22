@@ -1,34 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { doraSlider } from "../sliderProps";
-// import { useEffect, useState } from "react";
 const Service = (props) => {
-  // const [value, setValue] = useState(null);
-  // useEffect(() => {
-  //   fetch(
-  //     "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-  //   )
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // Work with the JSON data here
-  //       setValue(data);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors that occurred during the fetch
-  //       console.error("Fetch error:", error);
-  //     });
-  // }, []);
-  console.log(props)
   const serviceData = [
     {
       id: 1,
-      icon: "images/icons/app-desgin.svg", //"images/icons/ui-ux.svg",
-      title:`${props.data[0].name}`,//"UI/UX Solutions",
+      icon: "images/icons/app-desgin.svg", 
+      title:`${props.data[0].name}`,
       des: `${props.data[0].desc}`,
     },
     {
@@ -39,13 +16,13 @@ const Service = (props) => {
     },
     {
       id: 3,
-      icon: "images/icons/ui-ux.svg",//"images/icons/digital-marketing.svg",
-      title:`${props.data[2].name}`,//"Digital Marketing",
+      icon: "images/icons/ui-ux.svg",
+      title:`${props.data[2].name}`,
       des: `${props.data[2].desc}`,
     },
     {
       id: 4,
-      icon: "images/icons/digital-marketing.svg",//"images/icons/app-desgin.svg",
+      icon: "images/icons/digital-marketing.svg",
       title:`${props.data[3].name}`,
       des: `${props.data[3].desc}`,
     },
@@ -96,7 +73,7 @@ const Service = (props) => {
           </div>
           <Swiper
             {...doraSlider.serviceSlider}
-            className="swiper services-cont wow fadeInUp"
+            className="swiper services-cont wow fadeInUp" 
           >
             {" "}
             {serviceData.map((service, i) => (

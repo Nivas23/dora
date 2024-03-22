@@ -16,10 +16,35 @@ import { DoraContext } from "@/src/Context";
 import Cursor from "@/src/layout/Cursor";
 import PreLoader from "@/src/layout/PreLoader";
 import { dora } from "@/src/utils";
-import { Fragment, useContext, useEffect ,useState} from "react";
+import { Fragment, useContext, useEffect } from "react";
 
-const Index = () => {
-  const [value, setValue] = useState(null);
+export const getStaticProps = async () => {
+  try {
+    const res = await fetch(
+      "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const val = await res.json();
+    console.log(val); // Logging the fetched data
+    return {
+      props: {
+        val,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        val: null, // or handle error in another way
+      },
+    };
+  }
+};
+
+const Index = ({ val }) => {
   useEffect(() => {
     dora.imgToSvg();
     dora.customMouse();
@@ -33,22 +58,6 @@ const Index = () => {
         element.addEventListener("click", (e) => e.preventDefault());
       }
     }
-    fetch(
-      "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setValue(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-      });
   }, []);
   const { blog, portfolio_modal } = useContext(DoraContext);
   return (
@@ -57,38 +66,42 @@ const Index = () => {
       {portfolio_modal && <PortfolioPopup />}
       <ImageView />
       <VideoPopup />
-      {value==null?<PreLoader />:<>
-      {/* Preloader End */}
-      {/* Header start */}
-      <Header />
-      {/* Header End */}
-      {/* Home Section Start */}
-      <Hero data={value.user.about}/>
-      {/* Home Section End */}
-      {/* Support Section Start */}
-      <Support data={value.user.about}/>
-      {/* Support Section End */}
-      {/* Service Section Start */}
-      <Service data={value.user.services}/>
-      {/* Service Section End */}
-      {/* Experience Section Start */}
-      <Experience data={value.user.skills}/>
-      {/* Experience Section End */}
-      {/* Works Section Start */}
-      <Works data={value}/>
-      {/* Works Section End */}
-      {/* Feedback Section Start */}
-      <Feedback data={value.user.testimonials}/>
-      {/* Feedback Section End */}
-      {/* Blog Section Start */}
-      <Blog data={value}/>
-      {/* Blog Section End */}
-      {/* Contact Section Start */}
-      <Contact data={value.user.social_handles}/>
-      {/* Contact Section End */}
-      {/* Copyright */}
-      <Copyright />
-      </>}
+      {val == null ? (
+        <PreLoader />
+      ) : (
+        <>
+          {/* Preloader End */}
+          {/* Header start */}
+          <Header />
+          {/* Header End */}
+          {/* Home Section Start */}
+          <Hero data={val.user.about} />
+          {/* Home Section End */}
+          {/* Support Section Start */}
+          <Support data={val.user.about} />
+          {/* Support Section End */}
+          {/* Service Section Start */}
+          <Service data={val.user.services} />
+          {/* Service Section End */}
+          {/* Experience Section Start */}
+          <Experience data={val.user.skills} />
+          {/* Experience Section End */}
+          {/* Works Section Start */}
+          <Works data={val} />
+          {/* Works Section End */}
+          {/* Feedback Section Start */}
+          <Feedback data={val.user.testimonials} />
+          {/* Feedback Section End */}
+          {/* Blog Section Start */}
+          <Blog data={val} />
+          {/* Blog Section End */}
+          {/* Contact Section Start */}
+          <Contact data={val.user.social_handles} />
+          {/* Contact Section End */}
+          {/* Copyright */}
+          <Copyright />
+        </>
+      )}
       {/* Cursor */}
       <Cursor />
     </Fragment>

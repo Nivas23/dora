@@ -95,6 +95,11 @@ const PortfolioIsotope = () => {
             <img src="/images/works/1.png" alt="dora_img" />
           </a>
         </div>
+        <div className="works-col youtube">
+          <a href="//www.youtube.com/embed/B-ytMSuwbf8?autoplay=1">
+            <img src="/images/works/1.png" alt="dora_img" />
+          </a>
+        </div>
         {/* Vimeo */}
         <div className="works-col vimeo">
           <a href="//player.vimeo.com/video/132528823?autoplay=1">

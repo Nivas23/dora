@@ -1,27 +1,4 @@
-// import { useState, useEffect } from "react";
-const Hero = (props) => {
-  // const [value, setValue] = useState(null);
-  // useEffect(() => {
-  //   fetch(
-  //     "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-  //   )
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // Work with the JSON data here
-  //       setValue(data);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors that occurred during the fetch
-  //       console.error("Fetch error:", error);
-  //     });
-  // }, []);
-  
+const Hero = (props) => {  
 console.log(props.data)
   return (
     <section className="hero-section" id="home">
